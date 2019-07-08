@@ -15,7 +15,7 @@ import matplotlib.pyplot as plt
 import operator
 collected = defaultdict(float)
 
-sample_wind = r"C:\PROJECT\climate\output\sample_wind_site.csv"
+sample_wind = r".\climate\output\sample_wind_site.csv"
 
 times = []
 wind = []
@@ -28,7 +28,7 @@ with open(sample_wind) as csv_file:
         times.append(t_val)
         wind.append(s_val)
 
-sample_sun = r"C:\PROJECT\climate\output\sample_solar_site.csv"
+sample_sun = r".\output\sample_solar_site.csv"
 
 solar = []
 with open(sample_sun) as csv_file:

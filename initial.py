@@ -19,6 +19,8 @@ __vcs_id__ = '$'
 
 # gdal_translate "path/to/raster.tif" -b 1 "path/to/result.tif"
 
+OUT_DATA = r".\monthly_wind_pot_all.csv"
+
 # ds = Dataset(dataset)
 
 sun_hours = [3.15, 3.84, 4.49, 5.52, 5.87, 5.21, 5.03, 4.71, 5.03, 4.71, 3.45,
@@ -85,12 +87,12 @@ def process_dataset(ds,param, solar_collection=None):
 
         t_val = add_one_month(t_val)
     if solar_collection:
-        out_data = r"C:\PROJECT\climate\monthly_wind_pot_all.csv"
-        if exists(out_data):
+
+        if exists(OUT_DATA):
             mode = 'a'
         else:
             mode = 'w'
-        with open(out_data, 'w') as csv_out:
+        with open(OUT_DATA, 'w') as csv_out:
             csv_writer = writer(csv_out)
             csv_writer.writerow(('time', 'lat', 'lon', 'mean_temp', 'mean_wind', 'wind_potential'))
 
@@ -138,10 +140,10 @@ def wind_pot(surface_speed, temp):
 
 
 if __name__ == '__main__':
-    dataset = r"C:\Users\gnose\Downloads\tasmax_Amon_MRI-ESM2-0_ssp119_r1i1p1f1_gn_201501-210012.nc"
+    dataset = r".\tasmax_Amon_MRI-ESM2-0_ssp119_r1i1p1f1_gn_201501-210012.nc"
     ds = Dataset(dataset)
     col = process_dataset(ds, 'tasmax')
-    dataset = r"C:\Users\gnose\Downloads\sfcWind_Amon_MRI-ESM2-0_ssp370_r1i1p1f1_gn_201501-210012.nc"
+    dataset = r".\sfcWind_Amon_MRI-ESM2-0_ssp370_r1i1p1f1_gn_201501-210012.nc"
     ds = Dataset(dataset)
     process_dataset(ds, 'sfcWind', col)
     # print(wind_pot(6.07, 10))
